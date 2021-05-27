@@ -19,6 +19,8 @@ import numpy as np
 import pandas as pd
 
 # YOUR CODE HERE 1 to set data
+# Create an new data frame called data
+data = pd.DataFrame(np.random.rand(1000,1000))
 
 # Check your random values
 print(data.head())
