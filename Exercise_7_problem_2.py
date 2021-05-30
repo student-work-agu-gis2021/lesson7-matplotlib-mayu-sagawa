@@ -17,7 +17,11 @@
 # - Parse dates from the column `'DATE'` and set the dates as index in the dataframe 
 
 # YOUR CODE HERE 1 to read the data into data and parse dates
-
+#import pandas
+import pandas as pd
+#Read the data
+data = pd.read_csv(filepath_or_buffer='data/helsinki-vantaa.csv',
+ parse_dates=['DATE'], index_col='DATE')
 # This test print should print first five rows
 print(data.head())
 
@@ -31,7 +35,9 @@ print(len(data))
 # - Store the selection in a new variable `selection`
 
 # YOUR CODE HERE 2
-
+#Select data for a 30 year period
+selection = data.loc[(data.index>='1988-01-01')      
+                     &(data.index<'2018-12-31')]
 # Check that the data was read in correctly:
 selection.head()
 
@@ -51,13 +57,27 @@ print("Number of rows:", len(selection))
 # 
 
 # YOUR CODE HERE 3
+#import matplotlib
+import matplotlib.pyplot as plt
+#Create a line plot
+selection = selection.sort_index()
+plt.plot(selection.index,selection['TEMP_C'] ,
+         linestyle='solid',color='black',marker='o',markersize=3)
+#Add title and axis labels
+plt.title("Helsinki-Vantaa Airport")
+plt.xlabel("Time")
+plt.ylabel("Temperature (Celsius)")
+plt.figure(figsize=(14,6))
+plt.grid(True)
+plt.show()
 
 # Set output file name
-outputfp = ""
+outputfp = "temp_line_plot.png"
 
 # Save plot as image
 # YOUR CODE HERE 4
-
+#Save my figure as PNG file
+plt.savefig(outputfp)
 import os
 
 #Check that output file exists (also open the file and check that the plot looks ok!)
